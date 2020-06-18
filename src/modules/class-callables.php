@@ -210,6 +210,11 @@ class Callables extends Module {
 	 * @return mixed Return value of the callable.
 	 */
 	private function get_callable( $callable ) {
+		if (!is_callable($callable)) {
+//			var_dump('Not callable');
+//			print_r($callable);
+//			var_dump((new \Exception())->getTraceAsString());
+		}
 		return call_user_func( $callable );
 	}
 

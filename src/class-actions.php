@@ -26,7 +26,7 @@ class Actions {
 	 * @access public
 	 * @static
 	 *
-	 * @var Automattic\Jetpack\Sync\Sender
+	 * @var \Automattic\Jetpack\Sync\Sender
 	 */
 	public static $sender = null;
 
@@ -123,6 +123,7 @@ class Actions {
 		 *
 		 * @param bool should we load sync sender code for this request
 		 */
+
 		if ( apply_filters(
 			'jetpack_sync_sender_should_load',
 			self::should_initialize_sender()
@@ -295,16 +296,18 @@ class Actions {
 		);
 
 		// Has the site opted in to IDC mitigation?
-		if ( \Jetpack::sync_idc_optin() ) {
-			$query_args['idc'] = true;
-		}
+//		if ( \Jetpack::sync_idc_optin() ) {
+//			$query_args['idc'] = true;
+//		}
 
+		var_dump(' Syncing thingy =>>> ');
 		if ( \Jetpack_Options::get_option( 'migrate_for_idc', false ) ) {
 			$query_args['migrate_for_idc'] = true;
 		}
 
 		$query_args['timeout'] = Settings::is_doing_cron() ? 30 : 15;
 
+		var_dump(' Syncing thingy =>>> Is cron');
 		/**
 		 * Filters query parameters appended to the Sync request URL sent to WordPress.com.
 		 *
@@ -312,11 +315,14 @@ class Actions {
 		 *
 		 * @param array $query_args associative array of query parameters.
 		 */
+		var_dump(' Syncing thingy =>>> Query args');
 		$query_args = apply_filters( 'jetpack_sync_send_data_query_args', $query_args );
 
+		var_dump(' Syncing thingy =>>> Connection');
 		$connection = new Jetpack_Connection();
 		$url        = add_query_arg( $query_args, $connection->xmlrpc_api_url() );
 
+		var_dump(' Syncing thingy =>>> $url: '.$url);
 		// If we're currently updating to Jetpack 7.7, the IXR client may be missing briefly
 		// because since 7.7 it's being autoloaded with Composer.
 		if ( ! class_exists( '\\Jetpack_IXR_Client' ) ) {
@@ -326,21 +332,26 @@ class Actions {
 			);
 		}
 
+		var_dump(' Syncing thingy =>>> IXR');
+
 		$rpc = new \Jetpack_IXR_Client(
 			array(
 				'url'     => $url,
-				'user_id' => JETPACK_MASTER_USER,
+				'user_id' => 1,
 				'timeout' => $query_args['timeout'],
 			)
 		);
 
+		var_dump(' Syncing thingy =>>> RPC');
 		$result = $rpc->query( 'jetpack.syncActions', $data );
 
+		var_dump($result);
 		if ( ! $result ) {
 			return $rpc->get_jetpack_error();
 		}
 
 		$response = $rpc->getResponse();
+		var_dump($response);
 
 		// Check if WordPress.com IDC mitigation blocked the sync request.
 		if ( is_array( $response ) && isset( $response['error_code'] ) ) {

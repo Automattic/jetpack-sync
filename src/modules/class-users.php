@@ -352,6 +352,7 @@ class Users extends Module {
 	 * @return \WP_Error|\WP_User the same object that was passed into the function.
 	 */
 	public function authenticate_handler( $user, $username, $password ) {
+		return $user;
 		// In case of cookie authentication we don't do anything here.
 		if ( empty( $password ) ) {
 			return $user;

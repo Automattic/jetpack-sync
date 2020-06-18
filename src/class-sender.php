@@ -310,28 +310,35 @@ class Sender {
 	 * @return boolean|\WP_Error True if this sync sending was successful, error object otherwise.
 	 */
 	public function do_sync_and_set_delays( $queue ) {
+		var_Dump('Will `do_sync` for ');
+		var_dump($queue);
 		// Don't sync if importing.
+		var_dump('Sync1');
 		if ( defined( 'WP_IMPORTING' ) && WP_IMPORTING ) {
 			return new \WP_Error( 'is_importing' );
 		}
-
+		var_dump('Sync2');
 		if ( ! Settings::is_sender_enabled( $queue->id ) ) {
 			return new \WP_Error( 'sender_disabled_for_queue_' . $queue->id );
 		}
-
+		var_dump('Sync3');
 		// Don't sync if we are throttled.
+		var_dump($this->get_next_sync_time( $queue->id ));
+		var_dump(microtime(true));
 		if ( $this->get_next_sync_time( $queue->id ) > microtime( true ) ) {
-			return new \WP_Error( 'sync_throttled' );
+			//return new \WP_Error( 'sync_throttled' );
 		}
 
-		$start_time = microtime( true );
+		var_dump('Sync4');
 
+		$start_time = microtime( true );
+		var_dump('Sync5');
 		Settings::set_is_syncing( true );
 
 		$sync_result = $this->do_sync_for_queue( $queue );
-
+		var_dump('Sync6');
 		Settings::set_is_syncing( false );
-
+		var_dump('Sync7');
 		$exceeded_sync_wait_threshold = ( microtime( true ) - $start_time ) > (float) $this->get_sync_wait_threshold();
 
 		if ( is_wp_error( $sync_result ) ) {
@@ -427,10 +434,16 @@ class Sender {
 	 * @return boolean|\WP_Error True if this sync sending was successful, error object otherwise.
 	 */
 	public function do_sync_for_queue( $queue ) {
+
+		var_dump($queue);
+		vaR_dump($queue->size());
+
 		do_action( 'jetpack_sync_before_send_queue_' . $queue->id );
 		if ( $queue->size() === 0 ) {
 			return new \WP_Error( 'empty_queue_' . $queue->id );
 		}
+
+		var_dump('queue33');
 
 		/**
 		 * Now that we're sure we are about to sync, try to ignore user abort
@@ -440,15 +453,21 @@ class Sender {
 			ignore_user_abort( true );
 		}
 
+		var_dump('ignore user abort');
+
 		/* Don't make the request block till we finish, if possible. */
 		if ( Constants::is_true( 'REST_REQUEST' ) || Constants::is_true( 'XMLRPC_REQUEST' ) ) {
 			$this->fastcgi_finish_request();
 		}
 
+		var_dump('finish request');
+
 		$checkout_start_time = microtime( true );
 
 		$buffer = $queue->checkout_with_memory_limit( $this->dequeue_max_bytes, $this->upload_max_rows );
 
+		var_dump('buffer');
+		var_dump($buffer);
 		if ( ! $buffer ) {
 			// Buffer has no items.
 			return new \WP_Error( 'empty_buffer' );
@@ -539,13 +558,14 @@ class Sender {
 	 * @return Items processed. TODO: this doesn't make much sense anymore, it should probably be just a bool.
 	 */
 	public function send_action( $action_name, $data = null ) {
+		var_dump('Here!');
 		if ( ! Settings::is_sender_enabled( 'full_sync' ) ) {
 			return array();
 		}
 
 		// Compose the data to be sent.
 		$action_to_send = $this->create_action_to_send( $action_name, $data );
-
+		var_dump('Will send data');
 		list( $items_to_send, $skipped_items_ids, $items, $preprocess_duration ) = $this->get_items_to_send( $action_to_send, true ); // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
 		Settings::set_is_sending( true );
 		$processed_item_ids = apply_filters( 'jetpack_sync_send_data', $items_to_send, $this->get_codec()->name(), microtime( true ), 'immediate-send', 0, $preprocess_duration );

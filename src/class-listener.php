@@ -417,8 +417,8 @@ class Listener {
 		);
 
 		if ( $this->should_send_user_data_with_actor( $current_filter ) ) {
-			require_once JETPACK__PLUGIN_DIR . 'modules/protect/shared-functions.php';
-			$actor['ip']         = jetpack_protect_get_ip();
+//			require_once JETPACK__PLUGIN_DIR . 'modules/protect/shared-functions.php';
+//			$actor['ip']         = jetpack_protect_get_ip();
 			$actor['user_agent'] = isset( $_SERVER['HTTP_USER_AGENT'] ) ? $_SERVER['HTTP_USER_AGENT'] : 'unknown';
 		}
 
