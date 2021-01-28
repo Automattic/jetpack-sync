@@ -4,9 +4,9 @@
 	"type": "library",
 	"license": "GPL-2.0-or-later",
 	"require": {
-		"automattic/jetpack-connection": "1.23.0",
+		"automattic/jetpack-connection": "1.23.1",
 		"automattic/jetpack-constants": "1.6.1",
-		"automattic/jetpack-options": "1.11.0",
+		"automattic/jetpack-options": "1.11.1",
 		"automattic/jetpack-roles": "1.4.1",
 		"automattic/jetpack-status": "1.7.1"
 	},
