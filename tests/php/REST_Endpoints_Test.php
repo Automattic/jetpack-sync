@@ -1,4 +1,4 @@
-<?php // phpcs:ignore WordPress.Files.FileName.InvalidClassFileName
+<?php
 
 namespace Automattic\Jetpack\Sync;
 
@@ -16,7 +16,7 @@ use WP_REST_Server;
  *
  * @package automattic/jetpack-sync
  */
-class Test_REST_Endpoints extends TestCase {
+class REST_Endpoints_Test extends TestCase {
 
 	/**
 	 * REST Server object.

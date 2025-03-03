@@ -1,5 +1,4 @@
-<?php // phpcs:ignore WordPress.Files.FileName.InvalidClassFileName
-
+<?php
 /**
  * Test file for Automattic\Jetpack\Sync\Modules\Module
  *
@@ -11,11 +10,11 @@ namespace Automattic\Jetpack\Sync;
 use WorDBless\BaseTestCase;
 
 /**
- * Class Test_Module
+ * Class Module_Test
  *
  * @covers Automattic\Jetpack\Sync\Modules\Module
  */
-class Test_Module extends BaseTestCase {
+class Module_Test extends BaseTestCase {
 
 	/**
 	 * The module instance.

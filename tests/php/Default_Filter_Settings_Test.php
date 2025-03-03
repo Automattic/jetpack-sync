@@ -1,6 +1,6 @@
-<?php // phpcs:ignore WordPress.Files.FileName.InvalidClassFileName
+<?php
 /**
- * The Test_Default_Filter_Settings class.
+ * The Default_Filter_Settings_Test class.
  *
  * @package automattic/jetpack-sync
  */
@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @package automattic/jetpack-sync
  */
-class Test_Default_Filter_Settings extends TestCase {
+class Default_Filter_Settings_Test extends TestCase {
 
 	/**
 	 * Tests the test_get_default_settings method with invalid inputs which

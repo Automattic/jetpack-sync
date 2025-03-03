@@ -1,4 +1,4 @@
-<?php // phpcs:ignore WordPress.Files.FileName.InvalidClassFileName
+<?php
 
 namespace Automattic\Jetpack\Sync;
 
@@ -9,7 +9,7 @@ use WorDBless\BaseTestCase;
  *
  * @package automattic/jetpack-sync
  */
-class Test_Data_Settings extends BaseTestCase {
+class Data_Settings_Test extends BaseTestCase {
 
 	/**
 	 * An instance of the Data_Settings class.
