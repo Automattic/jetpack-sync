@@ -5,7 +5,7 @@
 	"license": "GPL-2.0-or-later",
 	"require": {
 		"php": ">=7.4",
-		"automattic/jetpack-connection": "^9.16.2",
+		"automattic/jetpack-connection": "^9.17.0-alpha",
 		"automattic/jetpack-constants": "^4.0.1",
 		"automattic/jetpack-password-checker": "^0.5.3",
 		"automattic/jetpack-ip": "^0.7.1",
@@ -43,7 +43,7 @@
 			"link-template": "https://github.com/Automattic/jetpack-sync/compare/v${old}...v${new}"
 		},
 		"branch-alias": {
-			"dev-trunk": "5.4.x-dev"
+			"dev-trunk": "5.5.x-dev"
 		},
 		"dependencies": {
 			"test-only": [
