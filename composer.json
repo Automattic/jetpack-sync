@@ -10,7 +10,7 @@
 		"automattic/jetpack-password-checker": "^0.5.3",
 		"automattic/jetpack-ip": "^0.7.1",
 		"automattic/jetpack-roles": "^4.0.1",
-		"automattic/jetpack-status": "^7.1.1"
+		"automattic/jetpack-status": "^7.1.2-alpha"
 	},
 	"require-dev": {
 		"yoast/phpunit-polyfills": "^4.0.0",
