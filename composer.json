@@ -8,7 +8,7 @@
 		"automattic/jetpack-connection": "^9.18.0-alpha",
 		"automattic/jetpack-constants": "^4.0.1",
 		"automattic/jetpack-password-checker": "^0.5.3",
-		"automattic/jetpack-ip": "^0.7.1",
+		"automattic/jetpack-ip": "^0.8.0-alpha",
 		"automattic/jetpack-roles": "^4.0.1",
 		"automattic/jetpack-status": "^7.1.2-alpha"
 	},
